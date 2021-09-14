@@ -1,5 +1,6 @@
 name: LavaFurnace
 version: ${project.version}
 main: com.mk7a.lava.LavaPlugin
-api-version: "1.13"
+api-version: 1.13
 authors: [mk7a]
+description: Lava furnace - smelt stones into lava.

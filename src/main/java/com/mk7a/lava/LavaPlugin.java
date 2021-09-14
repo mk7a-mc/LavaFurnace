@@ -169,9 +169,11 @@ public final class LavaPlugin extends JavaPlugin implements Listener {
         }
 
         // Instruction GUI items
-        ItemStack hopperStone = new ItemBuilder(Material.HOPPER, 1).setName("&6⬇ Stone ⬇").setLore(new String[]{" ", "&7250 blocks,", "&7any type."}).build();
+        ItemStack hopperStone = new ItemBuilder(Material.HOPPER, 1).setName("&6⬇ Stone ⬇")
+                .setLore(new String[]{" ", "&7250 blocks,", "&7any type."}).build();
         ItemStack hopperCoal = new ItemBuilder(Material.HOPPER, 1).setName("&6⬇ 10 Coal Blocks ⬇").build();
-        ItemStack hopperBucket = new ItemBuilder(Material.HOPPER, 1).setName("&6⬇ Bucket ⬇").setLore(new String[]{" ", "&7Place empty bucket"}).build();
+        ItemStack hopperBucket = new ItemBuilder(Material.HOPPER, 1).setName("&6⬇ Bucket ⬇")
+                .setLore(new String[]{" ", "&7Place empty bucket"}).build();
         inv.setItem(13, hopperStone);
         inv.setItem(COAL_COST, hopperCoal);
         inv.setItem(16, hopperBucket);
@@ -179,8 +181,9 @@ public final class LavaPlugin extends JavaPlugin implements Listener {
         ItemStack button = new ItemBuilder(Material.BLAZE_POWDER, 1).setName("&6&lSTART FURNACE").build();
         inv.setItem(37, button);
 
-        ItemStack credits = new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE, 1).setName("&7Designed by &6mk7a")
-                .setLore(new String[]{"&7for &fMine&bFrost&7.net"}).addEnchantment(Enchantment.ARROW_INFINITE, 1)
+        ItemStack credits = new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE, 1)
+                .setName("&7Designed by &bmk7a&7")
+                .addEnchantment(Enchantment.ARROW_INFINITE, 1)
                 .addFlags(ItemFlag.HIDE_ENCHANTS).build();
 
         inv.setItem(53, credits);
@@ -200,7 +203,13 @@ public final class LavaPlugin extends JavaPlugin implements Listener {
                     eventLocation.getWorld().dropItem(eventLocation, furnace.getItem(i));
                 }
             }
+
             lavaFurnaces.remove(eventLocation);
+
+            String configKey = locToYamlKey(eventLocation);
+            if (getConfig().contains(configKey)) {
+                getConfig().set(configKey, null);
+            }
         }
     }
 
